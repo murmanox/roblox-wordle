@@ -20,16 +20,19 @@
 		"prettier/prettier": [
 			"warn",
 			{
+				"semi": false,
 				"endOfLine": "auto",
 				"singleQuote": true,
 				"trailingComma": "es5",
 				"printWidth": 100,
 				"tabWidth": 2,
-				"useTabs": true
+				"useTabs": true,
+				"arrowParens": "always",
+				"bracketSpacing": true
 			}
 		],
 		"camelcase": "warn",
-		"semi": [0, { "beforeStatementContinuationChars": "never" }],
+		"semi": ["warn", "never", {"beforeStatementContinuationChars": "always"}],
 		"quotes": ["warn", "single", { "avoidEscape": true }]
 	}
 }
