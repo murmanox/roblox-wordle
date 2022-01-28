@@ -1,0 +1,33 @@
+{
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"jsx": true,
+		"useJSXTextNode": true,
+		"ecmaVersion": 2018,
+		"sourceType": "module",
+		"project": "./tsconfig.json"
+	},
+	"plugins": [
+		"@typescript-eslint",
+		"roblox-ts",
+		"prettier"
+	],
+	"extends": [
+		"plugin:@typescript-eslint/recommended",
+		"plugin:roblox-ts/recommended"
+	],
+	"rules": {
+		"prettier/prettier": [
+			"warn",
+			{
+				"trailingComma": "es5",
+				"printWidth": 100,
+				"tabWidth": 2,
+				"useTabs": true
+			}
+		],
+		"camelcase": "warn",
+		"semi": [0, { "beforeStatementContinuationChars": "never" }],
+		"quotes": ["warn", "single", { "avoidEscape": true }]
+	}
+}
