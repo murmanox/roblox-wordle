@@ -1,4 +1,5 @@
-import { Definitions } from '@rbxts/net'
+import { Definitions, Middleware } from '@rbxts/net'
+import { t } from '@rbxts/t'
 import { IGuessResponse } from 'types/interfaces/network-types'
 
 const remotes = Definitions.Create({
