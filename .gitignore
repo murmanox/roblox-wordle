@@ -3,3 +3,7 @@
 /include
 *.tsbuildinfo
 /pnpm-lock.yaml
+
+.vscode/*
+!.vscode/extensions.json
+!/.vscode/settings.json
