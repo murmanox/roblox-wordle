@@ -2,8 +2,11 @@ import remotes from 'shared/remotes'
 
 // Wrapper for remote to print error
 const guess = async (str: string) => {
-	const response = await remotes.Client.Get('guessWord').CallServerAsync(str, 777)
-	if (!response.success) {
+	const response = await remotes.Client.Get('guessWord')
+		.CallServerAsync(str)
+		.catch(() => {})
+
+	if (response && !response.success) {
 		print(response.error)
 	}
 }
