@@ -6,7 +6,7 @@ import { createGuessMiddleware } from './middleware/net-middleware'
 const remotes = Definitions.Create({
 	/** Checks if the guessed word matches the word saved on the server. */
 	guessWord: Definitions.ServerAsyncFunction<(word: string) => IGuessResponse>([
-		Middleware.TypeChecking(t.string, t.number),
+		Middleware.TypeChecking(t.string),
 		createGuessMiddleware(),
 	]),
 
