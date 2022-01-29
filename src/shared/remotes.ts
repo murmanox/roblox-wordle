@@ -1,6 +1,6 @@
 import { Definitions, Middleware } from '@rbxts/net'
 import { t } from '@rbxts/t'
-import { IGuessResponse } from 'types/interfaces/network-types'
+import { IGuessResponse, IWordResponse } from 'types/interfaces/network-types'
 import { createGuessMiddleware } from './middleware/net-middleware'
 
 const remotes = Definitions.Create({
@@ -11,7 +11,7 @@ const remotes = Definitions.Create({
 	]),
 
 	/** Give the player a new word to guess */
-	getRandomWord: Definitions.ServerAsyncFunction<(length: number) => any>(),
+	getWord: Definitions.ServerAsyncFunction<(length: number) => IWordResponse>(),
 })
 
 export = remotes

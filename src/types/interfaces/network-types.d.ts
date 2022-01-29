@@ -11,3 +11,9 @@ interface IGuessResponseBad {
 }
 
 export type IGuessResponse = IGuessResponseGood | IGuessResponseBad
+
+interface IWordResponse {
+	length: number
+	guessCount: number
+	previousGuesses: string[]
+}
