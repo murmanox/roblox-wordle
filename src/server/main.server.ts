@@ -41,11 +41,11 @@ function getWord(player: Player, length: number): IWordResponse {
 
 remotes.Server.Create('guessWord').SetCallback((player, guess) => {
 	const playerGuessData = playerWordMap.get(player)!
-	const { word, previousGuesses: guesses } = playerGuessData
+	const { word, previousGuesses } = playerGuessData
 
 	print(`${player} guessed ${guess}`)
 
-	const response = analyzeGuess(guess, word, guesses)
+	const response = analyzeGuess(guess, word, previousGuesses)
 
 	// Increment the amount of guesses by this player
 	if (response.success) {
