@@ -1,18 +1,21 @@
+import Roact from '@rbxts/roact'
+import { Players } from '@rbxts/services'
 import remotes from 'shared/remotes'
+import TextInput from './interface/components/input'
 
-// Wrapper for remote to print error
-const guess = async (str: string) => {
-	const response = await remotes.Client.Get('guessWord')
-		.CallServerAsync(str)
-		.catch(() => {})
+// Get current word from the server
+remotes.Client.Get('getWord').CallServerAsync(5)
 
-	if (response && !response.success) {
-		print(response.error)
-	}
+async function createUI() {
+	const playerGui = Players.LocalPlayer.WaitForChild('PlayerGui') as PlayerGui
+
+	const element = (
+		<screengui>
+			<TextInput />
+		</screengui>
+	)
+
+	Roact.mount(element, playerGui)
 }
 
-remotes.Client.Get('getRandomWord')
-	.CallServerAsync(5)
-	.then(() => guess('pickle'))
-	.then(() => guess('white'))
-	.then(() => guess('white'))
+createUI()
