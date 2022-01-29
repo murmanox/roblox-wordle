@@ -10,7 +10,7 @@ const remotes = Definitions.Create({
 		createGuessMiddleware(),
 	]),
 
-	/** Give the player a new word to guess */
+	/** Retrieve the player's current word or generate a new one */
 	getWord: Definitions.ServerAsyncFunction<(length: number) => IWordResponse>(),
 })
 
