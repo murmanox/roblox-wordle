@@ -31,6 +31,7 @@
 				"bracketSpacing": true
 			}
 		],
+		"@typescript-eslint/no-explicit-any": ["off", {"ignoreRestArgs": true}],
 		"camelcase": "warn",
 		"semi": ["warn", "never", {"beforeStatementContinuationChars": "always"}],
 		"quotes": ["warn", "single", { "avoidEscape": true }]
