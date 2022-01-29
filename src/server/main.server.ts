@@ -1,14 +1,7 @@
 import remotes from 'shared/remotes'
+import { IPlayerGuessData } from 'types/interfaces/guess-types'
+import { playerWordMap } from '../shared/playerWordMap'
 import { analyzeGuess } from './word-match'
-
-interface IPlayerGuessData {
-	word: string
-	guessCount: number
-	previousGuesses: string[]
-}
-
-/** A map of players to the current words they have to guess */
-const playerWordMap = new Map<Player, IPlayerGuessData>()
 
 remotes.Server.Create('guessWord').SetCallback((player, guess) => {
 	const playerGuessData = playerWordMap.get(player)!
