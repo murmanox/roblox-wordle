@@ -24,13 +24,16 @@ function checkPartials(s1: string, s2: string): number[] {
 	const partialIndex: number[] = []
 
 	// Convert strings to arrays
-	const string1 = [...s1]
-	const string2 = [...s2]
+	const guess = [...s1]
+	const word = [...s2]
 
 	// Look for partial matches in strings
-	for (let i = 0; i < string1.size(); i++) {
+	for (let i = 0; i < guess.size(); i++) {
+		const guessChar = guess[i]
+		const wordChar = word[i]
+
 		// Not a direct match but character exists in other string
-		if (string1[i] !== string2[i] && string1.indexOf(string2[i]) !== -1) {
+		if (guessChar !== wordChar && word.indexOf(guessChar) !== -1) {
 			partialIndex.push(i)
 		}
 	}
