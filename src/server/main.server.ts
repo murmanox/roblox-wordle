@@ -3,6 +3,7 @@ import remotes from 'shared/remotes'
 import { IPlayerGuessData } from 'types/interfaces/guess-types'
 import { IWordResponse } from 'types/interfaces/network-types'
 import { playerWordMap } from '../shared/playerWordMap'
+import { randomWord } from './utility/random'
 import { analyzeGuess } from './word-match'
 
 function getWord(player: Player, length: number): IWordResponse {
@@ -19,12 +20,9 @@ function getWord(player: Player, length: number): IWordResponse {
 		}
 	}
 
-	// Get random word using length
-	const newWord = 'weary'
-
 	// Reset player's guesses and assign new word to them
 	const guessData: IPlayerGuessData = {
-		word: newWord,
+		word: randomWord(length),
 		guessCount: 0,
 		previousGuesses: [],
 	}
@@ -33,7 +31,7 @@ function getWord(player: Player, length: number): IWordResponse {
 
 	// Return the length of the new word
 	return {
-		length: newWord.size(),
+		length: guessData.word.size(),
 		guessCount: guessData.guessCount,
 		previousGuesses: guessData.previousGuesses,
 	}
