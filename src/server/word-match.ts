@@ -1,8 +1,5 @@
 import { IGuessResponse } from 'types/interfaces/network-types'
-
-function isRealWord(word: string): boolean {
-	return true
-}
+import { allWords } from './words'
 
 function checkMatches(s1: string, s2: string): number[] {
 	const matchIndex: number[] = []
@@ -64,7 +61,7 @@ export function analyzeGuess(guess: string, word: string, pastGuesses: string[])
 	}
 
 	// Check if word is a real word
-	if (!isRealWord(guess)) {
+	if (!allWords.has(guess)) {
 		return { success: false, error: 'Not in word list' }
 	}
 
