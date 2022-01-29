@@ -1,5 +1,6 @@
 interface IGuessResponseGood {
 	success: true
+	win: boolean
 	matches: number[]
 	partials: number[]
 }

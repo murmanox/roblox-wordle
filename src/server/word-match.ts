@@ -50,7 +50,7 @@ function checkPartials(s1: string, s2: string): number[] {
 export function analyzeGuess(guess: string, word: string, pastGuesses: string[]): IGuessResponse {
 	// Check if player guessed correct word
 	if (word === guess) {
-		return { success: true, matches: checkMatches(guess, word), partials: [] }
+		return { win: true, success: true, matches: checkMatches(guess, word), partials: [] }
 	}
 
 	// Check that guess is unique
@@ -69,5 +69,10 @@ export function analyzeGuess(guess: string, word: string, pastGuesses: string[])
 	}
 
 	// Analyze the guess and return the results
-	return { success: true, matches: checkMatches(guess, word), partials: checkPartials(guess, word) }
+	return {
+		win: false,
+		success: true,
+		matches: checkMatches(guess, word),
+		partials: checkPartials(guess, word),
+	}
 }
