@@ -7,9 +7,12 @@ const WORD_LENGTH = 5
 const padding = new UDim(0, 5)
 const placeholderMessage = 'Type Your Guess Here'
 
-const format = (arr: defined[]) => `[${arr.join(', ')}]`
+const formatArray = (arr: defined[]) => `[${arr.join(', ')}]`
+const formatText = (str: string) => str.sub(1, WORD_LENGTH).lower().gsub(' ', '')[0]
 
 async function guessWord(word: string) {
+	if (word.size() !== WORD_LENGTH) return
+
 	const response = await remotes.Client.Get('guessWord').CallServerAsync(word)
 
 	if (!response.success) {
@@ -22,8 +25,8 @@ async function guessWord(word: string) {
 		return
 	}
 
-	print(`Correct values in position(s) ${format(response.matches)}`)
-	print(`Partial values in position(s) ${format(response.partials)}`)
+	print(`Correct values in position(s) ${formatArray(response.matches)}`)
+	print(`Partial values in position(s) ${formatArray(response.partials)}`)
 }
 
 interface Props {}
@@ -44,11 +47,11 @@ const TextInput = hooked<Props>((props) => {
 			Text={''}
 			Change={{
 				Text: (rbx) => {
-					rbx.Text = rbx.Text.sub(1, WORD_LENGTH)
+					rbx.Text = formatText(rbx.Text)
 				},
 			}}
 			Event={{
-				Focused: (rbx) => setMessage(''),
+				Focused: () => setMessage(''),
 				FocusLost: (rbx, enterPressed) => {
 					const text = rbx.Text
 					setMessage(placeholderMessage)
