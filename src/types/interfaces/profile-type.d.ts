@@ -1,3 +1,6 @@
+import { Profile } from '@rbxts/profileservice/globals'
+import { IPlayerGuessData } from './guess-types'
+
 export interface ProfileTemplate {
 	score: number
 	coins: number
@@ -23,9 +26,7 @@ export interface ProfileTemplate {
 	}
 
 	/** Data relating to the player's current word */
-	gameState: {
-		word: string
-		guessCount: number
-		previousGuesses: string[]
-	}
+	gameState: IPlayerGuessData
 }
+
+export type PlayerProfile = Profile<ProfileTemplate>
