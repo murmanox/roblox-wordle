@@ -11,8 +11,6 @@ const formatArray = (arr: defined[]) => `[${arr.join(', ')}]`
 const formatText = (str: string) => str.sub(1, WORD_LENGTH).lower().gsub(' ', '')[0]
 
 async function guessWord(word: string) {
-	if (word.size() !== WORD_LENGTH) return
-
 	const response = await remotes.Client.Get('guessWord').CallServerAsync(word)
 
 	if (!response.success) {
