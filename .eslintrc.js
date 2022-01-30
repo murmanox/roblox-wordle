@@ -33,8 +33,9 @@ module.exports = {
 			}
 		],
 		"@typescript-eslint/no-explicit-any": ["off", {ignoreRestArgs: true}],
+		"@typescript-eslint/no-extra-semi": ["off"],
 		camelcase: "warn",
-		semi: ["warn", "never", {beforeStatementContinuationChars: "always"}],
+		semi: ["error", "never"],
 		quotes: ["warn", "single", { "avoidEscape": true }]
 	}
 }
