@@ -23,7 +23,10 @@
     "typescript": "^4.5.5"
   },
   "dependencies": {
+    "@rbxts/lerp": "github:murmanox/lerp",
+    "@rbxts/loli-tween-animator": "github:murmanox/loli-tween-animator",
     "@rbxts/net": "^2.1.5",
+    "@rbxts/profileservice": "^1.4.1",
     "@rbxts/roact": "^1.4.0-ts.2",
     "@rbxts/roact-hooked": "^1.2.2",
     "@rbxts/roact-rodux-hooked": "^1.0.4",
