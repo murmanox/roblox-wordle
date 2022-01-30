@@ -31,3 +31,18 @@ const ProfileTemplate = {
 		previousGuesses: [],
 	},
 }
+
+/**
+ * Used to access and modify user profiles externally
+ */
+export namespace DataManager {
+	export function setPlayerWord(player: Player, word: string) {
+		const data = {
+			word,
+			guessCount: 0,
+			previousGuesses: [],
+		}
+
+		getProfile(player)!.Data.gameState = data
+	}
+}
