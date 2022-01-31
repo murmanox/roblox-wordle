@@ -143,6 +143,7 @@ export namespace DataManager {
 	}
 
 	export function setPlayerWord(player: Player, word: string) {
+		print('word set', word)
 		const data = {
 			word,
 			guessCount: 0,

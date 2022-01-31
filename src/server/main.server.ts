@@ -26,12 +26,18 @@ function guessWord(player: Player, profile: PlayerProfile, guess: string) {
 
 	// Increment the amount of guesses by this player
 	gameState.guessCount += 1
-	gameState.previousGuesses.push(guess)
+	gameState.previousGuesses.push({
+		word: guess,
+		win: response.win,
+		matches: response.matches,
+		partials: response.partials,
+	})
 
 	// Player has won
 	if (response.win) {
 		// Give points
-		// Assign player new word
+		// Delete solved word until they want a new one
+		DataManager.setPlayerWord(player, '')
 	}
 
 	return response

@@ -1,3 +1,4 @@
+import { IGuess } from 'types/interfaces/guess-types'
 import { IGuessResponse } from 'types/interfaces/network-types'
 import { allWords } from './words'
 
@@ -44,14 +45,14 @@ function checkPartials(s1: string, s2: string): number[] {
  * @param word The word to compare the guess against
  * @param pastGuesses An array of previous guesses
  */
-export function analyzeGuess(guess: string, word: string, pastGuesses: string[]): IGuessResponse {
+export function analyzeGuess(guess: string, word: string, pastGuesses: IGuess[]): IGuessResponse {
 	// Check if player guessed correct word
 	if (word === guess) {
 		return { success: true, win: true, matches: checkMatches(guess, word), partials: [] }
 	}
 
 	// Check that guess is unique
-	if (pastGuesses.includes(guess)) {
+	if (pastGuesses.map((guess) => guess.word).includes(guess)) {
 		return { success: false, error: 'Word was previously guessed' }
 	}
 
