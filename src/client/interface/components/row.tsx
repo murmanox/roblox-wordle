@@ -1,30 +1,45 @@
-import Roact from '@rbxts/roact'
+import Roact, { Element } from '@rbxts/roact'
 import { hooked } from '@rbxts/roact-hooked'
 import Tile from './tile'
 
 interface Props {
-	word: string
-	matches: number[]
-	partials: number[]
+	word?: string
+	matches?: number[]
+	partials?: number[]
+	length: number
+	locked: boolean
 }
 
-const Row = hooked<Props>((props) => {
-	const chars = [...props.word]
+const Row = hooked<Props>(({ length, locked = false, matches = [], partials = [], word = '' }) => {
+	const chars: string[] = word !== undefined ? [...word] : []
+
+	const elements: Element[] = []
+	for (let i = 0; i < length; i++) {
+		const match = (locked && matches && matches.includes(i)) || false
+		const partial = (locked && partials && partials.includes(i)) || false
+
+		elements.push(
+			<Tile letter={chars[i] ?? ''} match={match} partial={partial} locked={locked} index={i} />
+		)
+	}
 
 	return (
-		<frame Position={UDim2.fromScale(0.5, 0.5)} AnchorPoint={new Vector2(0.5, 0.5)}>
+		<frame
+			Position={UDim2.fromScale(0.5, 0.5)}
+			AnchorPoint={new Vector2(0.5, 0.5)}
+			AutomaticSize={'X'}
+			Size={UDim2.fromOffset(62, 62)}
+			BorderSizePixel={0}
+			BackgroundColor3={Color3.fromRGB(255, 112, 112)}
+			BackgroundTransparency={1}
+		>
 			<uilistlayout
 				FillDirection={'Horizontal'}
 				Padding={new UDim(0, 5)}
 				VerticalAlignment={'Center'}
 				HorizontalAlignment={'Center'}
 			/>
-			{chars.map((char, i) => {
-				const match = props.matches.includes(i)
-				const partial = props.partials.includes(i)
-
-				return <Tile letter={char} match={match} partial={partial} index={i} />
-			})}
+			{elements}
 		</frame>
 	)
 })

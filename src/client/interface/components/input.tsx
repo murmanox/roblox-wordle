@@ -1,6 +1,8 @@
 import Roact from '@rbxts/roact'
 import { hooked, useBinding } from '@rbxts/roact-hooked'
+import { useDispatch } from '@rbxts/roact-rodux-hooked'
 import remotes from 'shared/remotes'
+import { ClientStore, IClientStore } from '../store/rodux'
 
 const WORD_LENGTH = 5
 
@@ -31,6 +33,7 @@ interface Props {}
 
 const TextInput = hooked<Props>((props) => {
 	const [message, setMessage] = useBinding(placeholderMessage)
+	const dispatch = useDispatch<typeof ClientStore>()
 
 	return (
 		<textbox
@@ -56,6 +59,10 @@ const TextInput = hooked<Props>((props) => {
 
 					if (enterPressed) {
 						rbx.Text = ''
+						dispatch({
+							type: 'addGuess',
+							guess: { win: false, word: text, matches: [], partials: [] },
+						})
 						guessWord(text)
 					}
 				},
