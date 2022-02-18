@@ -7,4 +7,17 @@ export interface ITheme {
 	emptyBorder: Color3
 	lockedFont: Color3
 	unlockedFont: Color3
+	keyboard: Color3
+	font: Font
 }
+
+type Font = 'arialBold' | 'adelleSans'
+interface IFontData {
+	letter: string
+	x: number
+	y: number
+	width: number
+	height: number
+}
+
+type IFont = IFontData[]

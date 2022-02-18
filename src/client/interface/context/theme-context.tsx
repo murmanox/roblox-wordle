@@ -1,11 +1,12 @@
 import Roact, { Children } from '@rbxts/roact'
 import { hooked } from '@rbxts/roact-hooked'
 import { useSelector } from '@rbxts/roact-rodux-hooked'
+import { ITheme } from 'types/interfaces/theme-types'
 import { IClientStore } from '../store/rodux'
 
 const randomColor3 = (): Color3 => new Color3(math.random(), math.random(), math.random())
 
-const themeDark = {
+const themeDark: ITheme = {
 	match: Color3.fromRGB(83, 141, 78),
 	partial: Color3.fromRGB(181, 159, 59),
 	none: Color3.fromRGB(58, 58, 60),
@@ -14,9 +15,11 @@ const themeDark = {
 	emptyBorder: Color3.fromRGB(58, 58, 60),
 	lockedFont: Color3.fromRGB(215, 218, 220),
 	unlockedFont: Color3.fromRGB(255, 255, 255),
+	keyboard: Color3.fromRGB(129, 131, 132),
+	font: 'arialBold',
 }
 
-const themeRandom = {
+const themeRandom: ITheme = {
 	match: randomColor3(),
 	partial: randomColor3(),
 	none: randomColor3(),
@@ -25,9 +28,11 @@ const themeRandom = {
 	emptyBorder: randomColor3(),
 	lockedFont: randomColor3(),
 	unlockedFont: randomColor3(),
+	keyboard: randomColor3(),
+	font: 'adelleSans',
 }
 
-const themeLight = {
+const themeLight: ITheme = {
 	match: Color3.fromRGB(106, 170, 100),
 	partial: Color3.fromRGB(201, 180, 88),
 	none: Color3.fromRGB(120, 124, 126),
@@ -36,9 +41,11 @@ const themeLight = {
 	emptyBorder: Color3.fromRGB(211, 214, 218),
 	lockedFont: Color3.fromRGB(255, 255, 255),
 	unlockedFont: Color3.fromRGB(26, 26, 27),
+	keyboard: Color3.fromRGB(211, 214, 218),
+	font: 'arialBold',
 }
 
-export const themes = {
+export const themes: Record<string, ITheme> = {
 	dark: themeDark,
 	light: themeLight,
 	random: themeRandom,
