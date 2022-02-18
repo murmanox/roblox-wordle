@@ -2,8 +2,8 @@ import Roact from '@rbxts/roact'
 import { hooked, useContext } from '@rbxts/roact-hooked'
 import { Provider, useSelector } from '@rbxts/roact-rodux-hooked'
 import { IGuess } from 'types/interfaces/guess-types'
-import { ThemeContext, ThemeController } from '../context/theme-context'
-import { ClientStore, IClientStore } from '../store/rodux'
+import { ThemeContext, ThemeController } from '../../context/theme-context'
+import { ClientStore, IClientStore } from '../../store/rodux'
 import Grid from './grid'
 
 // Guesses to be added to the store

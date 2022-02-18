@@ -3,8 +3,8 @@ import { hooked } from '@rbxts/roact-hooked'
 import { Provider, useDispatch, useSelector, useStore } from '@rbxts/roact-rodux-hooked'
 import { ThemeController } from 'client/interface/context/theme-context'
 import { ClientStore, IClientStore } from 'client/interface/store/rodux'
-import Grid from '../grid'
-import TextInput from '../input'
+import Grid from '../grid/grid'
+import Keyboard from '../keyboard/keyboard'
 
 const Guess = hooked(() => {
 	const guesses = useSelector((state: IClientStore) => state.guesses)
@@ -12,8 +12,13 @@ const Guess = hooked(() => {
 
 	return (
 		<ThemeController>
-			<Grid guesses={guesses} current={word} />
-			<TextInput />
+			<frame Size={UDim2.fromScale(1, 1)} Transparency={1}>
+				<uilistlayout HorizontalAlignment={'Center'} />
+				<frame Size={new UDim2(1, 0, 1, -200)}>
+					<Grid guesses={guesses} current={word} />
+				</frame>
+				<Keyboard />
+			</frame>
 		</ThemeController>
 	)
 })

@@ -1,6 +1,7 @@
 import Roact, { Element } from '@rbxts/roact'
 import { hooked } from '@rbxts/roact-hooked'
 import { IGuess } from 'types/interfaces/guess-types'
+import Resize from '../resize'
 import Row from './row'
 
 const GUESS_AMOUNT = 6

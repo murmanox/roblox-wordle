@@ -9,9 +9,9 @@ import {
 	useRef,
 	useState,
 } from '@rbxts/roact-hooked'
+import { ThemeContext } from 'client/interface/context/theme-context'
+import { fonts } from 'client/interface/font'
 import { ITheme } from 'types/interfaces/theme-types'
-import { ThemeContext } from '../context/theme-context'
-import { dejavuSans } from '../font'
 
 const getColour = (theme: ITheme, flipped: boolean, match: boolean, partial: boolean) => {
 	if (flipped) {
@@ -81,7 +81,10 @@ const Tile = pure<Props>(({ index, letter, locked = false, match = false, partia
 				duration: 0.15,
 				goal: 1,
 				onUpdate: (value) => {
-					borderRef.getValue()!.ImageColor3 = theme.emptyBorder.Lerp(theme.filledBorder, value)
+					const border = borderRef.getValue()
+					if (border) {
+						border.ImageColor3 = theme.emptyBorder.Lerp(theme.filledBorder, value)
+					}
 				},
 			})
 			loli.to(0, {
@@ -95,6 +98,9 @@ const Tile = pure<Props>(({ index, letter, locked = false, match = false, partia
 			})
 		}
 	}, [letter])
+
+	const font = fonts[theme.font]
+	const letterData = font.get(letter.upper())
 
 	return (
 		<imagelabel
@@ -117,16 +123,22 @@ const Tile = pure<Props>(({ index, letter, locked = false, match = false, partia
 			>
 				<uiscale Scale={borderSize} />
 			</imagelabel>
-			<imagelabel
-				Ref={textRef}
-				Image={letter !== undefined ? dejavuSans[letter.lower()] : ''}
-				BackgroundTransparency={1}
+			<frame
 				Size={UDim2.fromScale(0.6, 0.6)}
 				Position={UDim2.fromScale(0.5, 0.5)}
 				AnchorPoint={new Vector2(0.5, 0.5)}
-				BorderSizePixel={0}
-				ImageColor3={flipped ? theme.lockedFont : theme.unlockedFont}
-			></imagelabel>
+				Transparency={1}
+			>
+				<imagelabel
+					Ref={textRef}
+					BackgroundTransparency={1}
+					Position={UDim2.fromScale(0.5, 0.5)}
+					AnchorPoint={new Vector2(0.5, 0.5)}
+					BorderSizePixel={0}
+					ImageColor3={flipped ? theme.lockedFont : theme.unlockedFont}
+					{...letterData}
+				></imagelabel>
+			</frame>
 		</imagelabel>
 	)
 })

@@ -1,16 +1,10 @@
 import Roact from '@rbxts/roact'
 import { hooked, useBinding } from '@rbxts/roact-hooked'
-import { useDispatch } from '@rbxts/roact-rodux-hooked'
+import { formatArray, formatText } from 'server/utility/format'
 import remotes from 'shared/remotes'
-import { ClientStore, IClientStore } from '../store/rodux'
-
-const WORD_LENGTH = 5
 
 const padding = new UDim(0, 5)
-const placeholderMessage = 'Type Your Guess Here'
-
-const formatArray = (arr: defined[]) => `[${arr.join(', ')}]`
-const formatText = (str: string) => str.sub(1, WORD_LENGTH).lower().gsub(' ', '')[0]
+const defaultPlaceholder = 'Enter text here'
 
 async function guessWord(word: string) {
 	const response = await remotes.Client.Get('guessWord').CallServerAsync(word)
@@ -29,11 +23,15 @@ async function guessWord(word: string) {
 	print(`Partial values in position(s) ${formatArray(response.partials)}`)
 }
 
-interface Props {}
+interface Props {
+	placeholder?: string
+	onChange?: (text: string) => void
+	onComplete?: (text: string) => void
+}
 
 const TextInput = hooked<Props>((props) => {
-	const [message, setMessage] = useBinding(placeholderMessage)
-	const dispatch = useDispatch<typeof ClientStore>()
+	const [placeholder, setPlaceholder] = useBinding(props.placeholder ?? defaultPlaceholder)
+	const [text, setText] = useBinding('')
 
 	return (
 		<textbox
@@ -44,26 +42,31 @@ const TextInput = hooked<Props>((props) => {
 			TextScaled={true}
 			BackgroundColor3={Color3.fromRGB(240, 240, 240)}
 			PlaceholderColor3={Color3.fromRGB(130, 130, 130)}
-			PlaceholderText={message}
-			Text={''}
+			ClearTextOnFocus={false}
+			PlaceholderText={placeholder}
+			Text={text}
 			Change={{
 				Text: (rbx) => {
-					rbx.Text = formatText(rbx.Text)
+					const oldText = text.getValue()
+					const newText = formatText(rbx.Text)
+					setText(newText)
+
+					// Has the text changed
+					if (oldText !== newText) {
+						// Fire onChange callback
+						props.onChange && props.onChange(newText)
+					}
 				},
 			}}
 			Event={{
-				Focused: () => setMessage(''),
+				Focused: () => setPlaceholder(''),
 				FocusLost: (rbx, enterPressed) => {
-					const text = rbx.Text
-					setMessage(placeholderMessage)
+					const message = text.getValue()
+					setPlaceholder(props.placeholder ?? defaultPlaceholder)
 
 					if (enterPressed) {
 						rbx.Text = ''
-						dispatch({
-							type: 'addGuess',
-							guess: { win: false, word: text, matches: [], partials: [] },
-						})
-						guessWord(text)
+						props.onComplete && props.onComplete(message)
 					}
 				},
 			}}
