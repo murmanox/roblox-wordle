@@ -14,9 +14,7 @@ const Guess = hooked(() => {
 		<ThemeController>
 			<frame Size={UDim2.fromScale(1, 1)} Transparency={1}>
 				<uilistlayout HorizontalAlignment={'Center'} />
-				<frame Size={new UDim2(1, 0, 1, -200)}>
-					<Grid guesses={guesses} current={word} />
-				</frame>
+				<Grid guesses={guesses} current={word} />
 				<Keyboard />
 			</frame>
 		</ThemeController>

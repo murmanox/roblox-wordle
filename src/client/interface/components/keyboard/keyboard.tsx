@@ -96,7 +96,8 @@ const Row = hooked<RowProps>(({ letters, enter, backspace }) => {
 const Keyboard = hooked<Props>((props) => {
 	return (
 		<frame
-			Transparency={0.5}
+			Transparency={1}
+			BorderSizePixel={0}
 			Position={UDim2.fromScale(0.5, 1)}
 			Size={UDim2.fromScale(1, 1)}
 			AnchorPoint={new Vector2(0.5, 1)}
