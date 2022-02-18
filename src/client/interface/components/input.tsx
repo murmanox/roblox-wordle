@@ -1,6 +1,6 @@
 import Roact from '@rbxts/roact'
 import { hooked, useBinding } from '@rbxts/roact-hooked'
-import { formatArray, formatText } from 'server/utility/format'
+import { formatArray, formatText } from 'shared/utility/format'
 import remotes from 'shared/remotes'
 
 const padding = new UDim(0, 5)
