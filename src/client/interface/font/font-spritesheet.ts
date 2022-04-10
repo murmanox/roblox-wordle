@@ -1,6 +1,11 @@
 import { IFont, IFontData } from 'types/interfaces/theme-types'
 
-type FontResult = { Image: string; Size: UDim2; ImageRectSize: Vector2; ImageRectOffset: Vector2 }
+type FontResult = {
+	Image: string
+	Size: UDim2
+	ImageRectSize: Vector2
+	ImageRectOffset: Vector2
+}
 
 export class FontSpritesheet {
 	private map = new Map<string, IFontData>()

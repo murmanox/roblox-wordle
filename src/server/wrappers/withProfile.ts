@@ -1,6 +1,6 @@
-import { DataManager } from 'server/profile-service'
+import { PlayerProfile } from 'server/data/player-data'
+import { DataManager } from 'server/data/profile-service'
 import { IResponseBad } from 'types/interfaces/network-types'
-import { PlayerProfile } from 'types/interfaces/profile-type'
 
 export default function withPlayerProfile<T extends Array<unknown>, R = void>(
 	fn: (player: Player, profile: PlayerProfile, ...args: T) => R

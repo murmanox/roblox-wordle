@@ -1,4 +1,4 @@
-import { IGuess } from './guess-types'
+import { IGuess, IGuessState } from './guess-types'
 
 export interface IGoodResponse {
 	success: true
@@ -10,7 +10,7 @@ export interface IResponseBad {
 }
 
 interface IGuessResponseGood extends IGoodResponse {
-	win: boolean
+	state: IGuessState
 	matches: number[]
 	partials: number[]
 }

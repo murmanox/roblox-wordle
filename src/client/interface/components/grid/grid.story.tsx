@@ -8,10 +8,10 @@ import Grid from './grid'
 
 // Guesses to be added to the store
 const guesses: IGuess[] = [
-	{ win: false, word: 'pills', matches: [1], partials: [2, 3] },
-	{ win: false, word: 'atone', matches: [], partials: [1] },
-	{ win: false, word: 'gnome', matches: [], partials: [0] },
-	{ win: true, word: 'light', matches: [0, 1, 2, 3, 4], partials: [] },
+	{ word: 'pills', matches: [1], partials: [2, 3] },
+	{ word: 'atone', matches: [], partials: [1] },
+	{ word: 'gnome', matches: [], partials: [0] },
+	{ word: 'light', matches: [0, 1, 2, 3, 4], partials: [] },
 ]
 
 const Background = hooked(() => {
@@ -20,11 +20,11 @@ const Background = hooked(() => {
 })
 
 const GridStoreWrapper = hooked(() => {
-	const { guesses, word } = useSelector((state: IClientStore) => {
-		return { guesses: state.guesses, word: state.word }
+	const { guesses, word, length } = useSelector((state: IClientStore) => {
+		return { guesses: state.guesses, word: state.word, length: state.length }
 	})
 
-	return <Grid guesses={guesses} current={word} />
+	return <Grid guesses={guesses} current={word} length={length} />
 })
 
 export = (story: GuiBase2d) => {

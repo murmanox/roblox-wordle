@@ -1,39 +1,15 @@
 import ProfileService from '@rbxts/profileservice'
 import { Profile } from '@rbxts/profileservice/globals'
 import { Players } from '@rbxts/services'
-import { PlayerProfile, ProfileTemplate } from 'types/interfaces/profile-type'
-
-// Default values to use for each property
-const template: ProfileTemplate = {
-	score: 0,
-	coins: 0,
-	solveHistory: [],
-	stats: {
-		wordsGuessed: 0,
-		wordsFailed: 0,
-		totalGuesses: 0,
-		solveTurn: {
-			1: 0,
-			2: 0,
-			3: 0,
-			4: 0,
-			5: 0,
-			6: 0,
-		},
-	},
-	gameState: {
-		word: '',
-		guessCount: 0,
-		previousGuesses: [],
-	},
-}
+import { IPlayerGuessData } from 'types/interfaces/guess-types'
+import { defaultPlayerData, PlayerProfile, ProfileTemplate } from './player-data'
 
 type PromiseMethods = [
 	(resolve: PlayerProfile | Promise<PlayerProfile>) => void,
 	(reason: string) => void
 ]
 
-const profileStore = ProfileService.GetProfileStore('PlayerData', template)
+const profileStore = ProfileService.GetProfileStore('PlayerData', defaultPlayerData)
 const profiles = new Map<Player, PlayerProfile>()
 const profilePromises = new Map<Player, Promise<PlayerProfile>>()
 const promiseResolve = new Map<Player, PromiseMethods>()
@@ -75,11 +51,7 @@ function onPlayerAdded(player: Player) {
 	}
 }
 
-for (const player of Players.GetPlayers()) {
-	task.spawn(onPlayerAdded, player)
-}
 Players.PlayerAdded.Connect(onPlayerAdded)
-
 Players.PlayerRemoving.Connect((player) => {
 	const profile = profiles.get(player)
 	if (profile) {
@@ -144,10 +116,11 @@ export namespace DataManager {
 
 	export function setPlayerWord(player: Player, word: string) {
 		print('word set', word)
-		const data = {
+		const data: IPlayerGuessData = {
 			word,
 			guessCount: 0,
 			previousGuesses: [],
+			usedLetters: [],
 		}
 
 		getProfile(player)!.Data.gameState = data

@@ -1,6 +1,6 @@
 import Roact, { Element } from '@rbxts/roact'
 import { hooked } from '@rbxts/roact-hooked'
-import Tile from './tile'
+import Tile from '../tile'
 
 interface Props {
 	word?: string
@@ -11,7 +11,7 @@ interface Props {
 }
 
 const Row = hooked<Props>(({ length, locked = false, matches = [], partials = [], word = '' }) => {
-	const chars: string[] = word !== undefined ? [...word] : []
+	const letters: string[] = word !== undefined ? [...word] : []
 
 	const elements: Element[] = []
 	for (let i = 0; i < length; i++) {
@@ -19,7 +19,15 @@ const Row = hooked<Props>(({ length, locked = false, matches = [], partials = []
 		const partial = (locked && partials && partials.includes(i)) || false
 
 		elements.push(
-			<Tile letter={chars[i] ?? ''} match={match} partial={partial} locked={locked} index={i} />
+			<Tile
+				Key={i}
+				letter={letters[i] ?? ''}
+				match={match}
+				partial={partial}
+				locked={locked}
+				index={i}
+				length={length}
+			/>
 		)
 	}
 

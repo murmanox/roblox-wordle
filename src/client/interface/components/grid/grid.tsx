@@ -2,12 +2,11 @@ import Roact, { Element } from '@rbxts/roact'
 import { hooked } from '@rbxts/roact-hooked'
 import { IGuess } from 'types/interfaces/guess-types'
 import ResizeToParent from '../common/resize-to-parent'
-import Row from './row'
+import Row from '../row/row'
 
 const GUESS_AMOUNT = 6
-const length = 5
 
-function createRows(amount: number, guesses: IGuess[], current: string): Element[] {
+function createRows(amount: number, guesses: IGuess[], current: string, length: number): Element[] {
 	// Create rows for previous guesses
 	const rows = guesses.map((guess) => {
 		return (
@@ -27,7 +26,7 @@ function createRows(amount: number, guesses: IGuess[], current: string): Element
 	}
 
 	// Create empty rows
-	for (let i = rows.size() - 1; i < length; i++) {
+	for (let i = rows.size(); i < amount; i++) {
 		rows.push(<Row length={length} locked={false} />)
 	}
 
@@ -37,6 +36,7 @@ function createRows(amount: number, guesses: IGuess[], current: string): Element
 interface Props {
 	guesses: IGuess[]
 	current: string
+	length: number
 }
 
 const Grid = hooked<Props>((props) => {
@@ -63,7 +63,7 @@ const Grid = hooked<Props>((props) => {
 						VerticalAlignment={'Center'}
 						HorizontalAlignment={'Center'}
 					/>
-					{createRows(GUESS_AMOUNT, props.guesses, props.current)}
+					{createRows(GUESS_AMOUNT, props.guesses, props.current, props.length)}
 				</frame>
 			</frame>
 		</frame>

@@ -29,7 +29,7 @@ const ResizeToParent = hooked<Props>(() => {
 		const connection = parent.GetPropertyChangedSignal('AbsoluteSize').Connect(() => {
 			const targetSize = instance.AbsoluteSize
 			const parentSize = parent.AbsoluteSize
-			print(`Size: ${targetSize}, Parent: ${parentSize}`)
+			// print(`Size: ${targetSize}, Parent: ${parentSize}`)
 
 			setScale(calculateRatio(scale.getValue(), targetSize, parentSize))
 		})

@@ -11,10 +11,6 @@ const Background = hooked(() => {
 })
 
 const KeyboardStoreWrapper = hooked(() => {
-	// const { guesses, word } = useSelector((state: IClientStore) => {
-	// 	return { guesses: state.guesses, word: state.word }
-	// })
-
 	return <Keyboard />
 })
 

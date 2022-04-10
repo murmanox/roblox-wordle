@@ -11,5 +11,7 @@
 	"eslint.format.enable": true,
 	"typescript.tsdk": "node_modules/typescript/lib",
 	"typescript.preferences.quoteStyle": "single",
-	"typescript.format.semicolons": "remove",
+    "typescript.format.semicolons": "remove",
+    "editor.insertSpaces": false,
+    "editor.tabSize": 2,
 }
