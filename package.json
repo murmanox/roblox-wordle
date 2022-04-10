@@ -38,6 +38,7 @@
     "@rbxts/rust-classes": "^0.11.1",
     "@rbxts/services": "^1.2.0",
     "@rbxts/signal": "^1.0.3",
-    "@rbxts/t": "^3.0.0"
+    "@rbxts/t": "^3.0.0",
+    "@rbxts/testez": "^0.3.1-ts.7"
   }
 }

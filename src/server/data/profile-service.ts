@@ -2,7 +2,7 @@ import ProfileService from '@rbxts/profileservice'
 import { Profile } from '@rbxts/profileservice/globals'
 import { Players } from '@rbxts/services'
 import { IPlayerGuessData } from 'types/interfaces/guess-types'
-import { defaultPlayerData, PlayerProfile, ProfileTemplate } from './player-data'
+import { defaultPlayerData, PlayerProfile, PlayerProfileData } from './player-data'
 
 type PromiseMethods = [
 	(resolve: PlayerProfile | Promise<PlayerProfile>) => void,
@@ -69,7 +69,7 @@ export namespace DataManager {
 	 * @param player The player's profile to get
 	 * @returns A promise that resolves with the player's profile
 	 */
-	export function getProfileAsync(player: Player): Promise<Profile<ProfileTemplate>> {
+	export function getProfileAsync(player: Player): Promise<Profile<PlayerProfileData>> {
 		// Getting stats of players outside of the game will cause memory leaks without some work
 		if (!player.IsDescendantOf(Players)) {
 			error("Player isn't in game")
@@ -107,7 +107,7 @@ export namespace DataManager {
 		return profiles.get(player)
 	}
 
-	export function getPlayerData(player: Player): ProfileTemplate | undefined {
+	export function getPlayerData(player: Player): PlayerProfileData | undefined {
 		const profile = getProfile(player)
 		if (profile) {
 			return profile.Data

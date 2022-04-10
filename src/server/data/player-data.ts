@@ -1,7 +1,7 @@
 import { Profile } from '@rbxts/profileservice/globals'
 import { IPlayerGuessData } from 'types/interfaces/guess-types'
 
-export interface ProfileTemplate {
+export interface PlayerProfileData {
 	score: number
 	coins: number
 
@@ -30,7 +30,7 @@ export interface ProfileTemplate {
 }
 
 // Default values to use for each property
-export const defaultPlayerData: ProfileTemplate = {
+export const defaultPlayerData: PlayerProfileData = {
 	score: 0,
 	coins: 0,
 	solveHistory: [],
@@ -55,4 +55,4 @@ export const defaultPlayerData: ProfileTemplate = {
 	},
 }
 
-export type PlayerProfile = Profile<ProfileTemplate>
+export type PlayerProfile = Profile<PlayerProfileData>

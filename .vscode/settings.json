@@ -13,5 +13,23 @@
 	"typescript.preferences.quoteStyle": "single",
     "typescript.format.semicolons": "remove",
     "editor.insertSpaces": false,
-    "editor.tabSize": 2,
+		"editor.tabSize": 2,
+		"files.exclude": {
+			"**/.git": true,
+			"**/.svn": true,
+			"**/.hg": true,
+			"**/CVS": true,
+			"**/.DS_Store": true,
+			"**/Thumbs.db": true,
+			"node_modules/[^@]*": true,
+			"node_modules/@[^r]*": true,
+			"out": true,
+			"include": true,
+			"node_modules": true
+		},
+		"hide-files.files": [
+			"out",
+			"include",
+			"node_modules",
+		],
 }
