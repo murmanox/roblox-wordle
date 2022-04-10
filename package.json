@@ -26,6 +26,7 @@
     "@rbxts/bin": "^1.2.6",
     "@rbxts/gamejoy": "^1.1.4",
     "@rbxts/lerp": "github:murmanox/lerp",
+    "@rbxts/llama": "^1.1.0-ts2",
     "@rbxts/loli-tween-animator": "github:murmanox/loli-tween-animator",
     "@rbxts/maid": "^1.0.0-ts.1",
     "@rbxts/net": "^2.1.5",

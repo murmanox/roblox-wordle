@@ -5,7 +5,7 @@ import { RunService } from '@rbxts/services'
 import { ThemeContext, ThemeController } from 'client/interface/context/theme-context'
 import { ClientStore, IClientStore } from 'client/interface/store/rodux'
 import Grid from '../grid/grid'
-import { guessWord } from '../../../guess-word'
+import { guessWord } from '../../../client-guess-word'
 import Keyboard from '../keyboard/keyboard'
 import TextInput from '../text-input'
 

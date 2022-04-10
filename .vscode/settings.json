@@ -23,13 +23,11 @@
 			"**/Thumbs.db": true,
 			"node_modules/[^@]*": true,
 			"node_modules/@[^r]*": true,
-			"out": true,
 			"include": true,
 			"node_modules": true
 		},
 		"hide-files.files": [
-			"out",
 			"include",
-			"node_modules",
+			"node_modules"
 		],
 }

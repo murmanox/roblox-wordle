@@ -1,7 +1,7 @@
 import Roact from '@rbxts/roact'
 import { hooked } from '@rbxts/roact-hooked'
 import { useStore, useDispatch } from '@rbxts/roact-rodux-hooked'
-import { guessWord } from 'client/guess-word'
+import { guessWord } from 'client/client-guess-word'
 import { IClientStore, ClientStore } from 'client/interface/store/rodux'
 import Row from './keyboard-row'
 

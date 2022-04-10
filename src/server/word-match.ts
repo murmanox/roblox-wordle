@@ -1,4 +1,4 @@
-import { IPlayerGuessData, IUsedLetter } from 'types/interfaces/guess-types'
+import { IPlayerGuessData } from 'types/interfaces/guess-types'
 import { IGuessResponse } from 'types/interfaces/network-types'
 import { createErrorGuessResponse, createGuessResponse } from './create-guess-response'
 import { allWords } from './words'

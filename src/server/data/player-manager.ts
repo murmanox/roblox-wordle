@@ -6,10 +6,7 @@ class PlayerManager {
 
 	public async onPlayerJoin(player: Player) {
 		const profile = await profileLoader.loadPlayerProfile(player)
-
-		if (!profile) {
-			return
-		}
+		if (!profile) return
 
 		const entity = new PlayerEntity(player, profile)
 		this.playerEntityMap.set(player, entity)

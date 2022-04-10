@@ -29,7 +29,6 @@ const KeyboardKey = hooked<Props>(({ button, onClick, used }) => {
 	useEffect(() => {
 		if (!used || initial) return
 		task.delay(1.5, () => {
-			print('used')
 			setState(used)
 		})
 	}, [used])
