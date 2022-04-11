@@ -1,15 +1,17 @@
 import Roact from '@rbxts/roact'
 import { hooked, useContext } from '@rbxts/roact-hooked'
 import { Provider, useDispatch, useSelector, useStore } from '@rbxts/roact-rodux-hooked'
-import { RunService } from '@rbxts/services'
+import { GuiService, RunService } from '@rbxts/services'
 import { ThemeContext, ThemeController } from 'client/interface/context/theme-context'
 import { ClientStore, IClientStore } from 'client/interface/store/rodux'
 import Grid from '../grid/grid'
 import { guessWord } from '../../../client-guess-word'
 import Keyboard from '../keyboard/keyboard'
 import TextInput from '../text-input'
+import ThemeButton from '../theme-button/theme-button'
 
 const isStudio = RunService.IsStudio()
+const inset = GuiService.GetGuiInset()[0]
 
 const Guess = hooked(() => {
 	const guesses = useSelector((state: IClientStore) => state.guesses)
@@ -61,13 +63,21 @@ const StudioUI = hooked(() => {
 
 const Background = hooked(() => {
 	const theme = useContext(ThemeContext)
-	return <frame Size={UDim2.fromScale(1, 1)} BackgroundColor3={theme.default} />
+	return (
+		<frame
+			Size={new UDim2(2, 0, 2, inset.Y)}
+			BackgroundColor3={theme.default}
+			Position={UDim2.fromScale(0.5, 0.5)}
+			AnchorPoint={new Vector2(0.5, 0.5)}
+		/>
+	)
 })
 
 const App = hooked((props) => (
 	<Provider store={ClientStore}>
 		<ThemeController>
 			<Background />
+			<ThemeButton />
 			<Guess />
 			<StudioUI />
 		</ThemeController>

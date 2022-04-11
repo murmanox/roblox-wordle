@@ -10,7 +10,7 @@ async function createUI() {
 	const playerGui = Players.LocalPlayer.WaitForChild('PlayerGui') as PlayerGui
 
 	const element = (
-		<screengui IgnoreGuiInset={true}>
+		<screengui IgnoreGuiInset={false}>
 			<App />
 		</screengui>
 	)
