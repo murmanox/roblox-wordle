@@ -14,8 +14,8 @@ export = () => {
 		})
 
 		it('Should only add partials as many times as it appears in the answer', () => {
-			const partials = checkPartials('xllll', 'l0000')
-			expect(List.equals(partials, [1])).to.equal(true)
+			const partials = checkPartials('lllll', 'xxxxl')
+			expect(List.equals(partials, [0])).to.equal(true)
 		})
 	})
 }

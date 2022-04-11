@@ -37,7 +37,6 @@ const StudioUI = hooked(() => {
 		length: state.length,
 	}))
 
-	const store = useStore<IClientStore>()
 	const dispatch = useDispatch<typeof ClientStore>()
 
 	return (

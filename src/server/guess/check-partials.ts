@@ -12,11 +12,14 @@ export function checkPartials(s1: string, s2: string): number[] {
 
 		// Letters match, not partial
 		if (guessChar === wordChar) continue
+		if (wordChar === '0') continue
 
 		const index = word.indexOf(guessChar)
 		if (index !== -1) {
+			// Replace character with '1' to prevent being detected multiple
+			// times while also not being detected as a match
+			word[index] = '1'
 			partialIndex.push(i)
-			word[index] = '0'
 		}
 	}
 

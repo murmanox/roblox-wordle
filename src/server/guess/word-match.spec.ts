@@ -45,8 +45,17 @@ export = () => {
 			} as any) as IGuessResponseGood
 
 			expect(List.equals(matches, [2])).to.equal(true)
-			print(inspect(partials))
 			expect(List.equals(partials, [3])).to.equal(true)
+		})
+
+		it('Should work with partials, matches and double letters', () => {
+			const { matches, partials } = analyzeGuess('aarti', {
+				word: 'atuas',
+				usedLetters: [],
+			} as any) as IGuessResponseGood
+
+			expect(List.equals(matches, [0])).to.equal(true)
+			expect(List.equals(partials, [1, 3])).to.equal(true)
 		})
 	})
 }

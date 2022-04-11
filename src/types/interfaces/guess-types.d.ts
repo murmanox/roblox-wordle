@@ -1,6 +1,7 @@
 export interface IPlayerGuessData {
 	word: string
 	guessCount: number
+	maxGuesses: number
 	previousGuesses: IGuess[]
 	usedLetters: IUsedLetter[]
 }

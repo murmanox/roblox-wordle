@@ -27,7 +27,7 @@ const initialState: IClientStore = {
 	word: '',
 	theme: 'dark',
 	guesses: [],
-	usedLetters: [{ letter: 'a', match: true }, { letter: 'b', partial: true }, { letter: 'c' }],
+	usedLetters: [],
 }
 
 const themeReducer = Rodux.createReducer<IClientStore, StoreActions>(initialState, {

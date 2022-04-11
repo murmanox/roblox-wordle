@@ -50,6 +50,7 @@ export const defaultPlayerData: PlayerProfileData = {
 	gameState: {
 		word: '',
 		guessCount: 0,
+		maxGuesses: 6,
 		previousGuesses: [],
 		usedLetters: [],
 	},

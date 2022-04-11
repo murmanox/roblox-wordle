@@ -11,7 +11,6 @@ interface Props {}
 const ThemeButton = hooked<Props>((props) => {
 	const store = useStore<IClientStore>()
 	const state = useSelector((state: IClientStore) => state.theme)
-
 	const text = state === 'dark' ? '🌛' : '☀️'
 
 	return (
@@ -19,17 +18,16 @@ const ThemeButton = hooked<Props>((props) => {
 			Text={text}
 			Size={UDim2.fromOffset(32, 32)}
 			Position={UDim2.fromOffset(104, 36 - inset.Y)}
+			AnchorPoint={new Vector2(0, 1)}
 			BorderSizePixel={0}
 			FontSize={'Size18'}
-			AnchorPoint={new Vector2(0, 1)}
 			BackgroundTransparency={0.5}
 			BackgroundColor3={new Color3()}
-			AutoButtonColor={true}
 			Event={{
 				Activated: (rbx) => {
 					store.dispatch({
 						type: 'setTheme',
-						theme: store.getState().theme === 'light' ? 'dark' : 'light',
+						theme: state === 'light' ? 'dark' : 'light',
 					})
 				},
 			}}
