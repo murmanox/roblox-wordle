@@ -25,6 +25,7 @@
   "dependencies": {
     "@rbxts/bin": "^1.2.6",
     "@rbxts/gamejoy": "^1.1.4",
+    "@rbxts/inspect": "^1.0.1",
     "@rbxts/lerp": "github:murmanox/lerp",
     "@rbxts/llama": "^1.1.0-ts2",
     "@rbxts/loli-tween-animator": "github:murmanox/loli-tween-animator",

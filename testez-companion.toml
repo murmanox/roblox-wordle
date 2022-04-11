@@ -1,0 +1,2 @@
+roots = ["ServerScriptService/TS"] # locations of your .spec files (which are found as descendants too)
+extraOptions = {} # optional extraOptions for TestBootstrap
