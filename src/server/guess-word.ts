@@ -3,7 +3,7 @@ import { IGuessResponse } from 'types/interfaces/network-types'
 import { DeepPartial } from 'types/util/partial'
 import { PlayerProfileData } from './data/player-data'
 import { PlayerEntity } from './data/player-entity'
-import { analyzeGuess } from './word-match'
+import { analyzeGuess } from './guess/word-match'
 
 /**
  * Compare the player's guess against their assigned word.

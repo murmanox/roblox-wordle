@@ -18,7 +18,6 @@ export function createGuessResponse(
 	for (const letter of l) {
 		//
 	}
-	print(l)
 
 	return {
 		success: true,
