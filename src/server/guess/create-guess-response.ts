@@ -19,26 +19,21 @@ export function createGuessResponse(
 	const allUsedLetters = [...usedLetters, ...newLetters]
 
 	// Generate a score for each letter based on its match and partial property
-	const myMap = new Map<string, { letter: IUsedLetter; score: number }[]>()
-	for (const letter of allUsedLetters) {
-		const score = letter.match ? 2 : letter.partial ? 1 : 0
+	const letterScores = new Map<string, { letter: IUsedLetter; score: number }>()
+	for (const usedLetter of allUsedLetters) {
+		const { letter, match, partial } = usedLetter
+		const currentLetterScore = match ? 2 : partial ? 1 : 0
 
-		let arr = myMap.get(letter.letter)
-		if (!arr) {
-			arr = []
-			myMap.set(letter.letter, arr)
+		// Get current highest score for this letter. -1 will always be overwritten (new letter).
+		const maxLetterScore = letterScores.get(letter)?.score ?? -1
+
+		// Update highest scoring letter
+		if (currentLetterScore > maxLetterScore) {
+			letterScores.set(letter, { letter: usedLetter, score: currentLetterScore })
 		}
-
-		arr.push({ score, letter })
 	}
 
-	// Extract only the highest scoring object for each unique letter
-	const uniqueFiltered = Object.values(myMap)
-		.map((v) =>
-			v.reduce((largest, current) => (current.score > largest.score ? current : largest), {
-				score: -1,
-			} as { letter: IUsedLetter; score: number })
-		)
+	const newUsedLetters = Object.values(letterScores)
 		.map((v) => v.letter)
 		// Sort for unit test equality
 		.sort((a, b) => a.letter < b.letter)
@@ -47,7 +42,7 @@ export function createGuessResponse(
 		success: true,
 		state: {
 			win: matches.size() === word.size(),
-			usedLetters: uniqueFiltered,
+			usedLetters: newUsedLetters,
 		},
 		matches,
 		partials,
