@@ -1,4 +1,4 @@
-import { IGuess, IGuessState } from './guess-types'
+import { IGuess, IGuessState, IUsedLetter } from './guess-types'
 
 export interface IGoodResponse {
 	success: true
@@ -18,7 +18,9 @@ interface IGuessResponseGood extends IGoodResponse {
 interface IWordResponseGood extends IGoodResponse {
 	length: number
 	guessCount: number
+	maxGuesses: number
 	previousGuesses: IGuess[]
+	usedLetters: IUsedLetter[]
 }
 
 export type IWordResponse = IWordResponseGood | IResponseBad

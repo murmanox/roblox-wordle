@@ -13,7 +13,12 @@ import { overwriteCharactersAtPositions } from 'shared/utility/string'
  * @param pastGuesses An array of previous guesses
  */
 export function analyzeGuess(guess: string, gameState: IPlayerGuessData): IGuessResponse {
-	const { word } = gameState
+	const { word, guessCount, maxGuesses } = gameState
+
+	// Make sure player hasn't used all their guesses
+	if (guessCount >= maxGuesses) {
+		return createErrorGuessResponse('Guess limit reached')
+	}
 
 	// Check that word is correct length
 	if (word.size() !== guess.size()) {
