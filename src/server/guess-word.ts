@@ -1,3 +1,4 @@
+import { Dictionary } from '@rbxts/llama'
 import { IPlayerGuessData } from 'types/interfaces/guess-types'
 import { IGuessResponse } from 'types/interfaces/network-types'
 import { DeepPartial } from 'types/util/partial'
@@ -19,8 +20,11 @@ export function guessWord(entity: PlayerEntity, guess: string): IGuessResponse {
 		return response
 	}
 
-	const e: DeepPartial<PlayerProfileData> = {
+	entity.updateData({
 		gameState: {
+			// Delete solved word until they want a new one
+			word: response.state.win ? '' : data.gameState.word,
+			guessCount: data.gameState.guessCount + 1,
 			usedLetters: response.state.usedLetters,
 			previousGuesses: [
 				...gameState.previousGuesses,
@@ -31,17 +35,7 @@ export function guessWord(entity: PlayerEntity, guess: string): IGuessResponse {
 				},
 			],
 		},
-	}
-
-	// Player has won
-	if (response.state.win) {
-		// Give points
-		// Delete solved word until they want a new one
-		e.gameState!.word = ''
-		// entity.updateData({ gameState: { word: '' } })
-	}
-
-	entity.updateData(e)
+	})
 
 	return response
 }

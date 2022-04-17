@@ -1,27 +1,15 @@
-import { RunService } from '@rbxts/services'
 import remotes from 'shared/remotes'
 import { IGuessResponse } from 'types/interfaces/network-types'
-import { ClientStore, IClientStore } from './interface/store/rodux'
-
-const isRunning = RunService.IsRunning()
-const fakeResponse: IGuessResponse = {
-	success: true,
-	matches: [0],
-	partials: [1],
-	state: { win: false, usedLetters: [] },
-}
+import { ClientStore } from './interface/store/rodux'
 
 export async function guessWord(): Promise<IGuessResponse> {
-	const word = ClientStore.getState().word
-	let response: IGuessResponse
+	const state = ClientStore.getState()
+	const { word } = state
+
+	// TODO: Client side checks that word is valid before sending to server
 
 	// Send the word to the server and wait for response
-	if (isRunning) {
-		response = await remotes.Client.Get('guessWord').CallServerAsync(word)
-	} else {
-		// Fake response from server when not running game
-		response = fakeResponse
-	}
+	const response = await remotes.Client.Get('guessWord').CallServerAsync(word)
 
 	// TODO: Make this a thunk
 	// Update state with response
@@ -31,6 +19,8 @@ export async function guessWord(): Promise<IGuessResponse> {
 		ClientStore.dispatch({ type: 'setWord', word: '' })
 		ClientStore.dispatch({ type: 'addGuess', guess: { word, matches, partials } })
 		ClientStore.dispatch({ type: 'setUsedLetters', letters: usedLetters })
+	} else {
+		warn(response.error)
 	}
 
 	return response

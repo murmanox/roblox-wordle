@@ -10,7 +10,7 @@ import { randomWord } from './utility/random'
  */
 export function getWord(entity: PlayerEntity, length: number): IWordResponse {
 	const data = entity.data as PlayerProfileData
-	const { word, guessCount, previousGuesses } = data.gameState
+	const { word, guessCount, previousGuesses, maxGuesses, usedLetters } = data.gameState
 
 	// Player already has a word to guess
 	if (word !== '') {
@@ -18,7 +18,9 @@ export function getWord(entity: PlayerEntity, length: number): IWordResponse {
 			success: true,
 			length: word.size(),
 			guessCount,
+			maxGuesses,
 			previousGuesses,
+			usedLetters,
 		}
 	}
 
@@ -28,5 +30,12 @@ export function getWord(entity: PlayerEntity, length: number): IWordResponse {
 	entity.updateData({ gameState: newState })
 
 	// Return the length of the new word
-	return { success: true, length: newWord.size(), guessCount: 0, previousGuesses: [] }
+	return {
+		success: true,
+		length: newWord.size(),
+		guessCount: 0,
+		maxGuesses: 6,
+		previousGuesses: [],
+		usedLetters: [],
+	}
 }
